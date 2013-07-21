@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using ClrTest.Reflection;
@@ -9,19 +10,17 @@ namespace Depender.Rules
     {
         protected override void DoChecks(MethodBase mehodBeingChecked, MethodBodyInfo methodBody, Dependency parent)
         {
+            if (mehodBeingChecked == null) throw new ArgumentNullException("mehodBeingChecked");
             foreach (ILInstruction instruction in methodBody.Instructions)
             {
-                if (instruction is InlineMethodInstruction)
+                if (!(instruction is InlineMethodInstruction)) continue;
+                InlineMethodInstruction line = instruction as InlineMethodInstruction;
+                if (line.Method.IsVirtual)
                 {
-                    InlineMethodInstruction line = instruction as InlineMethodInstruction;
-                    if (line.Method.IsVirtual)
-                    {
-                        parent.Add(new VirtualMethodCallDependency(line.Method.ReflectedType.Name, line.Method.Name));
+                    parent.Add(new VirtualMethodCallDependency(line.Method.ReflectedType.Name, line.Method.Name));
 
-                    }
                 }
             }
         }
-
     }
 }

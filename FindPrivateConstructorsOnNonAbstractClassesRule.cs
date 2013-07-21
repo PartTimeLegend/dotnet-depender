@@ -16,7 +16,8 @@ namespace Depender
 
         public bool CanCheck(object obj)
         {
-            return obj is ConstructorInfo;
+            var info = obj as ConstructorInfo;
+            return info != null;
         }
 
         public void Check(object obj, Dependency parent)

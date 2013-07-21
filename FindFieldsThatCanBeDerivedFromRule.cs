@@ -21,11 +21,11 @@ namespace Depender.Rules
         public void Check(FieldInfo info, Dependency parent)
         {
 //            Dependency parent = new Dependency(info.);
-            bool isInterface = info.FieldType.IsInterface;
-            bool isAbstract = info.FieldType.IsAbstract;
-            bool isNotSealed = !info.FieldType.IsSealed;
+            var isInterface = info.FieldType.IsInterface;
+            var isAbstract = info.FieldType.IsAbstract;
+            var isNotSealed = !info.FieldType.IsSealed;
 
-            string message = "";
+            var message = "";
             if (isInterface)
             {
                 message = string.Format("Field {0} is interface {1}", info.Name, info.FieldType.Name);

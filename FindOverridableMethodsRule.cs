@@ -7,19 +7,19 @@ namespace Depender
     {
         public void Check(MethodInfo info, Dependency parent)
         {
-            if (!info.IsFinal && (info.IsVirtual || info.IsAbstract))
-            {
-                parent.Add(new Dependency(string.Format(" {0}() can be overriden", info.Name)));
-            }
+            if (info.IsFinal || (!info.IsVirtual && !info.IsAbstract)) return;
+            parent.Add(new Dependency(string.Format(" {0}() can be overriden", info.Name)));
         }
 
         public bool CanCheck(object obj)
         {
-            return obj is MethodInfo;
+            var info = obj as MethodInfo;
+            return info != null;
         }
 
         public void Check(object obj, Dependency parent)
         {
+            if (obj == null) return;
             Check(obj as MethodInfo, parent);
         }
     }
