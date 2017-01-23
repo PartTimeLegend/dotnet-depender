@@ -1,0 +1,2 @@
+# dotnet-depender
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/989ca48ccc8849b28ead68300677bf29)](https://www.codacy.com/app/PartTimeLegend/dotnet-depender?utm_source=github.com&utm_medium=referral&utm_content=PartTimeLegend/dotnet-depender&utm_campaign=badger)
